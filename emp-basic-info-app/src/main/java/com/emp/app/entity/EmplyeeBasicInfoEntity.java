@@ -31,9 +31,9 @@ public class EmplyeeBasicInfoEntity {
 	private String userName;
 	@Column(name = "PHONE", length = 15, nullable = false, unique = true)
 	private String phone;
-	@Column(name = "PERSONAL_EMAIL", length = 25, nullable = false, unique = true)
+	@Column(name = "PERSONAL_EMAIL", length = 50, nullable = false, unique = true)
 	private String personalEmail;
-	@Column(name = "PASSWORD", length = 15, nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 	@Column(name = "NO_OF_COMPANIES", length = 20, nullable = false)
 	private Integer noOfCompanies;

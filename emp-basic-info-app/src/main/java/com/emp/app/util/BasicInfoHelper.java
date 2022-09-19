@@ -21,19 +21,16 @@ public class BasicInfoHelper {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	
-	
-
 	public EmplyeeBasicInfoEntity convertToEntityObject(EmpBasicInfoRequestDto empBasicInfoRequestDto) {
 		EmplyeeBasicInfoEntity emplyeeBasicInfoEntity = new EmplyeeBasicInfoEntity();
 		emplyeeBasicInfoEntity.setFirstName(empBasicInfoRequestDto.getFirstName());
 		emplyeeBasicInfoEntity.setLastName(empBasicInfoRequestDto.getLastName());
 		emplyeeBasicInfoEntity.setMiddleName(empBasicInfoRequestDto.getMiddleName());
 		emplyeeBasicInfoEntity.setNoOfCompanies(empBasicInfoRequestDto.getNoOfCompanies());
-		empBasicInfoRequestDto.setPersonalEmail(empBasicInfoRequestDto.getPersonalEmail());
+		emplyeeBasicInfoEntity.setPersonalEmail(empBasicInfoRequestDto.getPersonalEmail());
 		emplyeeBasicInfoEntity.setPhone(empBasicInfoRequestDto.getPhone());		
 		emplyeeBasicInfoEntity.setUserName(empBasicInfoRequestDto.getUserName());	
-		emplyeeBasicInfoEntity.setPassword(passwordEncoder.encode(generatePassword()));
+		emplyeeBasicInfoEntity.setPassword(passwordEncoder.encode("ASDFG"));
 		List<CompaniesEntity> companiesEntities = new ArrayList<>();
 		for(String cn : empBasicInfoRequestDto.getCompanyNames()) {
 			CompaniesEntity companiesEntity = new CompaniesEntity();
@@ -44,22 +41,12 @@ public class BasicInfoHelper {
 		emplyeeBasicInfoEntity.setCompaniesEntities(companiesEntities);
 		return emplyeeBasicInfoEntity;
 	}
-	
-	private String generatePassword() {
-		String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
-		StringBuilder builder = new StringBuilder();
-		for(int i=0; i<12; i++) {
-			int index = (int)(alphaNumericString.length() * Math.random());
-			builder.append(alphaNumericString.charAt(index));
-		}
-		return builder.toString();
-	}
 
 	public SuccessResponseDto convertToResponseObject(EmplyeeBasicInfoEntity emplyeeBasicInfoEntity, Notification notification) {
 		SuccessResponseDto successResponseDto = new SuccessResponseDto();
 		EmpBasicInfoResponseDto empBasicInfoResponseDto = new EmpBasicInfoResponseDto();
 		empBasicInfoResponseDto
-		.setCompanyNames(emplyeeBasicInfoEntity.getCompaniesEntities().stream().map(ce -> ce.getCompanyName()).collect(Collectors.toList()));
+		.setCompanyNames(emplyeeBasicInfoEntity.getCompaniesEntities().stream().map(CompaniesEntity::getCompanyName).collect(Collectors.toList()));
 		empBasicInfoResponseDto.setEmpBasicInfoId(emplyeeBasicInfoEntity.getEmpBasicInfoId());
 		empBasicInfoResponseDto.setFirstName(emplyeeBasicInfoEntity.getFirstName());
 		empBasicInfoResponseDto.setLastName(emplyeeBasicInfoEntity.getLastName());
