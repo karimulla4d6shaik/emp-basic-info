@@ -6,4 +6,5 @@ public class PathConstants {
 	
 	public static final String ROOT_LEVEL_PATH = "/v1/basic/info";
 	public static final String LOGIN_PATH = "/login"; 
+	public static final String DETAILS_PATH = "/{username}";
 }

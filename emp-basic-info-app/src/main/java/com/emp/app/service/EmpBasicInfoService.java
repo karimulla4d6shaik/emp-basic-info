@@ -12,4 +12,6 @@ public interface EmpBasicInfoService {
 	public SuccessResponseDto register(EmpBasicInfoRequestDto empBasicInfoRequestDto);
 
 	public LoginSuccessDto login(LoginDto loginDto, AuthenticationManager authenticationManager);
+	
+	public SuccessResponseDto getDetailsByUsername(String userName);
 }
