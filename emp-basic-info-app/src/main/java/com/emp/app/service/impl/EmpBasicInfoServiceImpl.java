@@ -28,6 +28,8 @@ import com.emp.app.util.BasicInfoHelper;
 	
 @Service
 public class EmpBasicInfoServiceImpl implements EmpBasicInfoService, UserDetailsService {
+	
+	private static final String STATUS_CODE = "SUCCESS";
 	@Autowired
 	private EmpBasicInfoRepo empBasicInfoRepo;
 	@Autowired
@@ -57,6 +59,7 @@ public class EmpBasicInfoServiceImpl implements EmpBasicInfoService, UserDetails
 		loginSuccessDto.setUserName(principal.getUsername());
 		String token = jwtConfig.generateToken(principal);
 		loginSuccessDto.setToken(token);
+		loginSuccessDto.setStatus(STATUS_CODE);
 		return loginSuccessDto;
 	}
 
